@@ -1,0 +1,23 @@
+from models.Book import Book
+from typing import List, Optional
+ 
+class Library:
+    def __init__(self):
+        self._books: List[Book] = []
+ 
+    def add_book(self, book: Book) -> None:
+        self._books.append(book)
+ 
+    def list_books(self) -> List[Book]:
+        """Retourne la liste des livres."""
+        return list(self._books)
+ 
+    def search_by_title(self, keyword: str) -> List[Book]:
+        keyword = keyword.lower()
+        return [b for b in self._books if keyword in b.title.lower()]
+ 
+    def find_book(self, title: str) -> Optional[Book]:
+        for book in self._books:
+            if book.title.lower() == title.lower():
+                return book
+        return None
