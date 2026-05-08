@@ -23,7 +23,8 @@ class Library:
         return None
     
     def sort_books(self, by: str = "title") -> List[Book]:
-        """Trie les livres par 'title' (défaut) ou 'year'."""
+        if by not in ("title", "year"):
+            raise ValueError(f"Critère de tri invalide : {by!r}. Utiliser 'title' ou 'year'.")
         key = (lambda b: b.title.lower()) if by == "title" else (lambda b: b.year)
         return sorted(self._books, key=key)
     
